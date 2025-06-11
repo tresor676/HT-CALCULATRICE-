@@ -14,23 +14,19 @@ function calculateResult() {
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
 
+// Toujours visible, mais déclenche l'installation seulement si possible
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  installBtn.style.display = 'inline-block';
 
   installBtn.addEventListener('click', async () => {
-    installBtn.style.display = 'none';
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      console.log('PWA installation accepted');
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('Résultat de l’installation :', outcome);
+      deferredPrompt = null;
+    } else {
+      alert("Installation non disponible pour ce navigateur.");
     }
-    deferredPrompt = null;
   });
-});
-
-window.addEventListener('appinstalled', () => {
-  console.log('PWA installed');
-  installBtn.style.display = 'none';
 });
