@@ -110,3 +110,6 @@ function recallMemory() { currentInput = memory.toString(); updateDisplay(); }
 function addMemory() { memory += parseFloat(currentInput) || 0; }
 function subtractMemory() { memory -= parseFloat(currentInput) || 0; }
 function storeMemory() { memory = parseFloat(currentInput) || 0; }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
