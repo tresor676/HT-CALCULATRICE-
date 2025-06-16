@@ -2,60 +2,74 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculatrice Scientifique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1e1e1e" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icons/icon-192.png" />
-  <meta name="theme-color" content="#4CAF50" />
   <link rel="stylesheet" href="style.css" />
+  <title>HT CALCULATOR</title>
 </head>
 <body>
   <div class="calculator">
-    <input type="text" id="display" disabled />
+    <div class="screen">
+      <div id="history"></div>
+      <div id="display">0</div>
+    </div>
+
+    <div class="top-bar">
+      <button id="degRad">DEG</button>
+      <div class="memory">
+        <button onclick="clearMemory()">MC</button>
+        <button onclick="recallMemory()">MR</button>
+        <button onclick="addMemory()">M+</button>
+        <button onclick="subtractMemory()">M-</button>
+        <button onclick="storeMemory()">MS</button>
+      </div>
+    </div>
+
     <div class="buttons">
-      <button id="theme-toggle">Changer de thème</button>
-      <button id="mode-toggle">Degrés/Radians</button>
-      <button onclick="clearDisplay()">C</button>
-      <button onclick="appendValue('(')">(</button>
-      <button onclick="appendValue(')')">)</button>
-      <button onclick="appendValue('/')">÷</button>
-      <button onclick="appendValue('7')">7</button>
-      <button onclick="appendValue('8')">8</button>
-      <button onclick="appendValue('9')">9</button>
-      <button onclick="appendValue('*')">×</button>
-      <button onclick="appendValue('4')">4</button>
-      <button onclick="appendValue('5')">5</button>
-      <button onclick="appendValue('6')">6</button>
-      <button onclick="appendValue('-')">−</button>
-      <button onclick="appendValue('1')">1</button>
-      <button onclick="appendValue('2')">2</button>
-      <button onclick="appendValue('3')">3</button>
-      <button onclick="appendValue('+')">+</button>
-      <button onclick="appendValue('0')">0</button>
-      <button onclick="appendValue('.')">.</button>
-      <button onclick="calculateResult()">=</button>
+      <button onclick="input('2nd')">2ⁿᵈ</button>
+      <button onclick="input('pi')">π</button>
+      <button onclick="input('e')">e</button>
+      <button onclick="clearAll()">C</button>
+      <button onclick="backspace()">⌫</button>
+
+      <button onclick="square()">x²</button>
+      <button onclick="reciprocal()">⅟x</button>
+      <button onclick="absValue()">|x|</button>
+      <button onclick="exp()">exp</button>
+      <button onclick="mod()">mod</button>
+
+      <button onclick="sqrt()">√</button>
+      <button onclick="input('(')">(</button>
+      <button onclick="input(')')">)</button>
+      <button onclick="factorial()">n!</button>
+      <button onclick="input('/')">÷</button>
+
+      <button onclick="power()">xʸ</button>
+      <button onclick="input('7')">7</button>
+      <button onclick="input('8')">8</button>
+      <button onclick="input('9')">9</button>
+      <button onclick="input('*')">×</button>
+
+      <button onclick="tenPower()">10ˣ</button>
+      <button onclick="input('4')">4</button>
+      <button onclick="input('5')">5</button>
+      <button onclick="input('6')">6</button>
+      <button onclick="input('-')">−</button>
+
+      <button onclick="log10()">log</button>
+      <button onclick="input('1')">1</button>
+      <button onclick="input('2')">2</button>
+      <button onclick="input('3')">3</button>
+      <button onclick="input('+')">+</button>
+
+      <button onclick="logE()">ln</button>
+      <button onclick="plusMinus()">+/−</button>
+      <button onclick="input('0')">0</button>
+      <button onclick="input('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
     </div>
   </div>
   <script src="script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(() => console.log('Service Worker enregistré avec succès'))
-        .catch(error => console.log('Erreur Service Worker:', error));
-    }
-  </script>
-  <!-- Bouton d'installation permanent -->
-<button id="installBtn">📲 Installer cette app</button>
-
-<script>
-  // Enregistrement du service worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('✅ Service Worker enregistré'))
-      .catch(err => console.error('❌ Service Worker erreur :', err));
-  }
-</script>
-
-<script src="script.js"></script>
 </body>
 </html>
