@@ -1,32 +1,112 @@
-function appendValue(value) {
-  document.getElementById('display').value += value;
+let currentInput = "";
+let history = "";
+let memory = 0;
+let isDeg = true;
+
+const display = document.getElementById("display");
+const historyDisplay = document.getElementById("history");
+const degRadBtn = document.getElementById("degRad");
+
+function updateDisplay() {
+  display.textContent = currentInput || "0";
+  historyDisplay.textContent = history;
 }
-function clearDisplay() {
-  document.getElementById('display').value = '';
+
+function input(val) {
+  currentInput += val;
+  updateDisplay();
 }
-function calculateResult() {
+
+function clearAll() {
+  currentInput = "";
+  history = "";
+  updateDisplay();
+}
+
+function backspace() {
+  currentInput = currentInput.slice(0, -1);
+  updateDisplay();
+}
+
+function plusMinus() {
+  if (currentInput.startsWith("-")) currentInput = currentInput.slice(1);
+  else currentInput = "-" + currentInput;
+  updateDisplay();
+}
+
+function factorial() {
+  let num = parseFloat(currentInput);
+  if (num < 0) return;
+  let result = 1;
+  for (let i = 2; i <= num; i++) result *= i;
+  currentInput = result.toString();
+  updateDisplay();
+}
+
+function sqrt() {
+  currentInput = Math.sqrt(parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function reciprocal() {
+  currentInput = (1 / parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function absValue() {
+  currentInput = Math.abs(parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function exp() {
+  currentInput = Math.exp(parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function log10() {
+  currentInput = Math.log10(parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function logE() {
+  currentInput = Math.log(parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function power() {
+  currentInput += "**";
+  updateDisplay();
+}
+
+function tenPower() {
+  currentInput = Math.pow(10, parseFloat(currentInput)).toString();
+  updateDisplay();
+}
+
+function mod() {
+  currentInput += "%";
+  updateDisplay();
+}
+
+function calculate() {
   try {
-    document.getElementById('display').value = eval(document.getElementById('display').value);
+    history = currentInput;
+    currentInput = eval(currentInput.replace(/π/g, Math.PI).replace(/e/g, Math.E)).toString();
   } catch {
-    document.getElementById('display').value = 'Erreur';
+    currentInput = "Erreur";
   }
+  updateDisplay();
 }
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
 
-// Toujours visible, mais déclenche l'installation seulement si possible
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
+// DEG/RAD toggle
+degRadBtn.onclick = () => {
+  isDeg = !isDeg;
+  degRadBtn.textContent = isDeg ? "DEG" : "RAD";
+};
 
-  installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log('Résultat de l’installation :', outcome);
-      deferredPrompt = null;
-    } else {
-      alert("Installation non disponible pour ce navigateur.");
-    }
-  });
-});
+// Mémoire
+function clearMemory() { memory = 0; }
+function recallMemory() { currentInput = memory.toString(); updateDisplay(); }
+function addMemory() { memory += parseFloat(currentInput) || 0; }
+function subtractMemory() { memory -= parseFloat(currentInput) || 0; }
+function storeMemory() { memory = parseFloat(currentInput) || 0; }
