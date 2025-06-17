@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#1e1e1e" />
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
+  <li><a href="#trigonometry">Trigonometry</a></li>
   <title>HT CALCULATOR</title>
 </head>
 <body>
@@ -25,7 +26,16 @@
         <button onclick="storeMemory()">MS</button>
       </div>
     </div>
+    <div id="trigonometry">
+          <button onclick="calculateSin()">sin(</button>
+          <button onclick="calculatecos()">cos(</button>
+          <button onclick="calculateTan()">tan(</button>
 
+           <button onclick="calculateAsin()">asin(</button>
+           <button onclick="calculateAcos()">acos(</button>
+           <button onclick="calculateAtan()">atan(</button>
+           <p id="result"></p>
+    </div>
     <div class="buttons">
       <button onclick="input('2nd')">2ⁿᵈ</button>
       <button onclick="input('pi')">π</button>
@@ -33,13 +43,13 @@
       <button onclick="clearAll()">C</button>
       <button onclick="backspace()">⌫</button>
 
-      <button onclick="square()">x²</button>
-      <button onclick="reciprocal()">⅟x</button>
-      <button onclick="absValue()">|x|</button>
-      <button onclick="exp()">exp</button>
-      <button onclick="mod()">mod</button>
+      <button onclick="square(x²)">x²</button>
+      <button onclick="reciprocal(¹/x)">⅟x</button>
+      <button onclick="absValue(|x|)">|x|</button>
+      <button onclick="exp(exp)">exp</button>
+      <button onclick="mod(mod)">mod</button>
 
-      <button onclick="sqrt()">√</button>
+      <button onclick="sqrt(√)">√</button>
       <button onclick="input('(')">(</button>
       <button onclick="input(')')">)</button>
       <button onclick="factorial()">n!</button>
