@@ -1,87 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#1e1e1e" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
-  <li><a href="#trigonometry">Trigonometry</a></li>
-  <title>HT CALCULATOR</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ludo PWA</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body { font-family: Arial, sans-serif; text-align: center; }
+#board {
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    grid-template-rows: repeat(15, 40px);
+    gap: 1px;
+    margin: 20px auto;
+    width: max-content;
+}
+.cell { width: 40px; height: 40px; border: 1px solid #ccc; position: relative; }
+.red, .blue, .green, .yellow {
+    border-radius: 50%;
+    width: 30px; height: 30px; margin: auto;
+}
+.red { background-color: red; }
+.blue { background-color: blue; }
+.green { background-color: green; }
+.yellow { background-color: yellow; }
+#controls { margin-top: 20px; }
+</style>
 </head>
 <body>
-  <div class="calculator">
-    <div class="screen">
-      <div id="history"></div>
-      <div id="display">0</div>
-    </div>
 
-    <div class="top-bar">
-      <button id="degRad">DEG</button>
-      <div class="memory">
-        <button onclick="clearMemory()">MC</button>
-        <button onclick="recallMemory()">MR</button>
-        <button onclick="addMemory()">M+</button>
-        <button onclick="subtractMemory()">M-</button>
-        <button onclick="storeMemory()">MS</button>
-      </div>
-    </div>
-    <div id="trigonometry">
-           <input type="number"id="angle" placeholder="Entrez l'aangle en degrés>
-          <button onclick="calculateSin()">sin(</button>
-          <button onclick="calculatecos()">cos(</button>
-          <button onclick="calculateTan()">tan(</button>
+<h1>Ludo PWA Officiel</h1>
+<div id="board"></div>
+<div id="controls">
+    <button onclick="rollDice()">Lancer le dé</button>
+    <p id="dice">Dé: 0</p>
+    <p id="info">Joueur Rouge commence</p>
+</div>
 
-          <input type="number" id=value"placeholder="Entrez une valeur ">
-           <button onclick="calculateAsin()">asin(</button>
-           <button onclick="calculateAcos()">acos(</button>
-           <button onclick="calculateAtan()">atan(</button>
-           <p id="result"></p>
-    </div>
-    <div class="buttons">
-      <button onclick="input('2nd')">2ⁿᵈ</button>
-      <button onclick="input('pi')">π</button>
-      <button onclick="input('e')">e</button>
-      <button onclick="clearAll()">C</button>
-      <button onclick="backspace()">⌫</button>
+<script src="ludo.js"></script>
 
-      <button onclick="square(x²)">x²</button>
-      <button onclick="reciprocal(¹/x)">⅟x</button>
-      <button onclick="absValue(|x|)">|x|</button>
-      <button onclick="exp(exp)">exp</button>
-      <button onclick="mod(mod)">mod</button>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(()=>console.log('Service Worker actif'));
+}
+</script>
 
-      <button onclick="sqrt(√)">√</button>
-      <button onclick="input('(')">(</button>
-      <button onclick="input(')')">)</button>
-      <button onclick="factorial()">n!</button>
-      <button onclick="input('/')">÷</button>
-
-      <button onclick="power()">xʸ</button>
-      <button onclick="input('7')">7</button>
-      <button onclick="input('8')">8</button>
-      <button onclick="input('9')">9</button>
-      <button onclick="input('*')">×</button>
-
-      <button onclick="tenPower()">10ˣ</button>
-      <button onclick="input('4')">4</button>
-      <button onclick="input('5')">5</button>
-      <button onclick="input('6')">6</button>
-      <button onclick="input('-')">−</button>
-
-      <button onclick="log10()">log</button>
-      <button onclick="input('1')">1</button>
-      <button onclick="input('2')">2</button>
-      <button onclick="input('3')">3</button>
-      <button onclick="input('+')">+</button>
-
-      <button onclick="logE()">ln</button>
-      <button onclick="plusMinus()">+/−</button>
-      <button onclick="input('0')">0</button>
-      <button onclick="input('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
 </body>
 </html>
